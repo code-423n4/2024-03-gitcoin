@@ -3,8 +3,8 @@
 ## ⭐️ Sponsor: Add code to this repo
 
 - [ ] Create a PR to this repo with the below changes:
-- [X] Provide a self-contained repository with working commands that will build (at least) all in-scope contracts, and commands that will run tests producing gas reports for the relevant contracts.
-- [X] Make sure your code is thoroughly commented using the [NatSpec format](https://docs.soliditylang.org/en/v0.5.10/natspec-format.html#natspec-format).
+- [x] Provide a self-contained repository with working commands that will build (at least) all in-scope contracts, and commands that will run tests producing gas reports for the relevant contracts.
+- [x] Make sure your code is thoroughly commented using the [NatSpec format](https://docs.soliditylang.org/en/v0.5.10/natspec-format.html#natspec-format).
 - [ ] Please have final versions of contracts and documentation added/updated in this repo **no less than 48 business hours prior to audit start time.**
 - [ ] Be prepared for a 🚨code freeze🚨 for the duration of the audit — important because it establishes a level playing field. We want to ensure everyone's looking at the same code, no matter when they look during the audit. (Note: this includes your own repo, since a PR can leak alpha to our wardens!)
 
@@ -105,8 +105,8 @@ _List all files in scope in the table below (along with hyperlinks) -- and feel 
 
 ---
 
-| Contract                                                                         | SLOC | Purpose                                                         | Libraries used    |
-| -------------------------------------------------------------------------------- | ---- | --------------------------------------------------------------- | ----------------- |
+| Contract                                                                                                                               | SLOC | Purpose                                                         | Libraries used    |
+| -------------------------------------------------------------------------------------------------------------------------------------- | ---- | --------------------------------------------------------------- | ----------------- |
 | [contracts/IIdentityStaking.sol](https://github.com/code-423n4/2024-03-gitcoin/blob/main/id-staking-v2/contracts/IIdentityStaking.sol) | 3    | This contract implements interface for identity staking staking | `@openzeppelin/*` |
 | [contracts/IdentityStaking.sol](https://github.com/code-423n4/2024-03-gitcoin/blob/main/id-staking-v2/contracts/IdentityStaking.sol)   | 297  | This contract implements identity staking                       | na                |
 
@@ -116,8 +116,8 @@ _List any files/contracts that are out of scope for this audit._
 
 ---
 
-| Contract                                                                               | SLOC | Purpose                   | Libraries used |
-| -------------------------------------------------------------------------------------- | ---- | ------------------------- | -------------- |
+| Contract                                                                                                                                     | SLOC | Purpose                   | Libraries used |
+| -------------------------------------------------------------------------------------------------------------------------------------------- | ---- | ------------------------- | -------------- |
 | [contracts/test_mocks/GTC.sol](https://github.com/code-423n4/2024-03-gitcoin/blob/main/id-staking-v2/contracts/test_mocks/GTC.sol)           | 205  | Mock contract for testing | na             |
 | [contracts/test_mocks/SafeMath.sol](https://github.com/code-423n4/2024-03-gitcoin/blob/main/id-staking-v2/contracts/test_mocks/SafeMath.sol) | 52   | Mock contract for testing | na             |
 | [contracts/test_mocks/Upgrade.sol](https://github.com/code-423n4/2024-03-gitcoin/blob/main/id-staking-v2/contracts/test_mocks/Upgrade.sol)   | 7    | Mock contract for testing | na             |
@@ -149,7 +149,7 @@ Also gas optimisations and security aspects are outlined here:
 This contract will interact with the GTC ERC-20 contract, as the GTC token will be the token that will be staked. GTC is available on:
 
 - ETH mainnet, the token contract address is: `0xde30da39c46104798bb5aa3fe8b9e0e1f348163f`
-- Optimism, the token contract address is: `0x1EBA7a6a72c894026Cd654AC5CDCF83A46445B08` (TODO: get confirmation that token address is correct)
+- Optimism, the token contract address is: `0x1EBA7a6a72c894026Cd654AC5CDCF83A46445B08`
 
 The smart contract will be deployed to **ETH Mainnet** and **Optimism**.
 
@@ -179,7 +179,19 @@ _List specific areas to address - see [this blog post](https://medium.com/code4r
 
 _Describe the project's main invariants (properties that should NEVER EVER be broken)._
 
-TODO: how does this apply to us?
+### Invariant 1 - total slashed in current or previous round
+
+```
+for round = currentRound or currentRound - 1
+
+totalSlashed[round] = (sum of stake.slashedAmount for all selfStakes and communityStakes where stake.slashedInRound = round)
+```
+
+### Invariant 2 - userTotalStaked
+
+```
+userTotalStaked[address] = selfStakes[address].amount + sum(communityStakes[address][x].amount for all x staked on by this address)
+```
 
 ## Scoping Details
 
@@ -217,8 +229,11 @@ Clone and cd into the `id-staking-v2` folder in the repo:
 Run the tests: `npx hardhat test`
 Run the tests with gas report: `REPORT_GAS=true npx hardhat test`
 
-TODO:
-_Note: Many wardens run Slither as a first pass for testing. Please document any known errors with no workaround._
+## Slither warning
+
+Slither will report dangerous comparison: `uses timestamp for comparisons` ([https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp](https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp))
+
+This issue is known and considered acceptable as explained here: [Appendix D: Security](https://github.com/code-423n4/2024-03-gitcoin/blob/main/id-staking-v2/README.md#appendix-d-security)
 
 ## Miscellaneous
 
