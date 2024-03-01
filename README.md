@@ -107,8 +107,8 @@ _List all files in scope in the table below (along with hyperlinks) -- and feel 
 
 | Contract                                                                                                                   | SLOC | Purpose                                   | Libraries used    |
 | -------------------------------------------------------------------------------------------------------------------------- | ---- | ----------------------------------------- | ----------------- |
-| [contracts/IIdentityStaking.sol](https://github.com/code-423n4/2024-03-gitcoin/id-staking-v2/contracts/IIdentityStaking.sol) | 3  | This contract implements interface for identity staking staking | `@openzeppelin/*` |
-| [contracts/IdentityStaking.sol](https://github.com/code-423n4/2024-03-gitcoin/id-staking-v2/contracts/IdentityStaking.sol) | 297  | This contract implements identity staking | na |
+| [contracts/IIdentityStaking.sol](./id-staking-v2/contracts/IIdentityStaking.sol) | 3  | This contract implements interface for identity staking staking | `@openzeppelin/*` |
+| [contracts/IdentityStaking.sol](./id-staking-v2/contracts/IdentityStaking.sol) | 297  | This contract implements identity staking | na |
 
 
 ## Out of scope
@@ -119,9 +119,9 @@ _List any files/contracts that are out of scope for this audit._
 
 | Contract                                                                                                                           | SLOC | Purpose                   | Libraries used |
 | ---------------------------------------------------------------------------------------------------------------------------------- | ---- | ------------------------- | -------------- |
-| [contracts/test_mocks/GTC.sol](https://github.com/code-423n4/2024-03-gitcoin/id-staking-v2/contracts/test_mocks/GTC.sol)           | 205  | Mock contract for testing | na             |
-| [contracts/test_mocks/SafeMath.sol](https://github.com/code-423n4/2024-03-gitcoin/id-staking-v2/contracts/test_mocks/SafeMath.sol) | 52   | Mock contract for testing | na             |
-| [contracts/test_mocks/Upgrade.sol](https://github.com/code-423n4/2024-03-gitcoin/id-staking-v2/contracts/test_mocks/Upgrade.sol)   | 7    | Mock contract for testing | na             |
+| [contracts/test_mocks/GTC.sol](./id-staking-v2/contracts/test_mocks/GTC.sol)           | 205  | Mock contract for testing | na             |
+| [contracts/test_mocks/SafeMath.sol](./id-staking-v2/contracts/test_mocks/SafeMath.sol) | 52   | Mock contract for testing | na             |
+| [contracts/test_mocks/Upgrade.sol](./id-staking-v2/contracts/test_mocks/Upgrade.sol)   | 7    | Mock contract for testing | na             |
 
 # Additional Context
 
@@ -160,6 +160,8 @@ _List specific areas to address - see [this blog post](https://medium.com/code4r
 ## Main invariants
 
 _Describe the project's main invariants (properties that should NEVER EVER be broken)._
+
+TODO: does this apply to us?
 
 ## Scoping Details
 
