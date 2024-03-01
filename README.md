@@ -40,7 +40,7 @@
   - Scout awards: $500 in USDC
   - Mitigation Review: $3,000 in USDC (*Opportunity goes to top 3 certified wardens based on placement in this audit.*)
 - Join [C4 Discord](https://discord.gg/code4rena) to register
-- Submit findings [using the C4 form](https://code4rena.com/contests/2024-03-gitcoin/submit)
+- Submit findings [using the C4 form](https://code4rena.com/contests/2024-03-gitcoin-passport-identity-staking-invitational/submit)
 - [Read our guidelines for more details](https://docs.code4rena.com/roles/wardens)
 - Starts March 6, 2024 20:00 UTC
 - Ends March 12, 2024 20:00 UTC
