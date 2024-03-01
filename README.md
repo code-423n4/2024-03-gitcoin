@@ -3,8 +3,8 @@
 ## ⭐️ Sponsor: Add code to this repo
 
 - [ ] Create a PR to this repo with the below changes:
-- [ ] Provide a self-contained repository with working commands that will build (at least) all in-scope contracts, and commands that will run tests producing gas reports for the relevant contracts.
-- [ ] Make sure your code is thoroughly commented using the [NatSpec format](https://docs.soliditylang.org/en/v0.5.10/natspec-format.html#natspec-format).
+- [X] Provide a self-contained repository with working commands that will build (at least) all in-scope contracts, and commands that will run tests producing gas reports for the relevant contracts.
+- [X] Make sure your code is thoroughly commented using the [NatSpec format](https://docs.soliditylang.org/en/v0.5.10/natspec-format.html#natspec-format).
 - [ ] Please have final versions of contracts and documentation added/updated in this repo **no less than 48 business hours prior to audit start time.**
 - [ ] Be prepared for a 🚨code freeze🚨 for the duration of the audit — important because it establishes a level playing field. We want to ensure everyone's looking at the same code, no matter when they look during the audit. (Note: this includes your own repo, since a PR can leak alpha to our wardens!)
 
@@ -107,8 +107,8 @@ _List all files in scope in the table below (along with hyperlinks) -- and feel 
 
 | Contract                                                                         | SLOC | Purpose                                                         | Libraries used    |
 | -------------------------------------------------------------------------------- | ---- | --------------------------------------------------------------- | ----------------- |
-| [contracts/IIdentityStaking.sol](./id-staking-v2/contracts/IIdentityStaking.sol) | 3    | This contract implements interface for identity staking staking | `@openzeppelin/*` |
-| [contracts/IdentityStaking.sol](./id-staking-v2/contracts/IdentityStaking.sol)   | 297  | This contract implements identity staking                       | na                |
+| [contracts/IIdentityStaking.sol](https://github.com/code-423n4/2024-03-gitcoin/blob/main/id-staking-v2/contracts/IIdentityStaking.sol) | 3    | This contract implements interface for identity staking staking | `@openzeppelin/*` |
+| [contracts/IdentityStaking.sol](https://github.com/code-423n4/2024-03-gitcoin/blob/main/id-staking-v2/contracts/IdentityStaking.sol)   | 297  | This contract implements identity staking                       | na                |
 
 ## Out of scope
 
@@ -118,9 +118,9 @@ _List any files/contracts that are out of scope for this audit._
 
 | Contract                                                                               | SLOC | Purpose                   | Libraries used |
 | -------------------------------------------------------------------------------------- | ---- | ------------------------- | -------------- |
-| [contracts/test_mocks/GTC.sol](./id-staking-v2/contracts/test_mocks/GTC.sol)           | 205  | Mock contract for testing | na             |
-| [contracts/test_mocks/SafeMath.sol](./id-staking-v2/contracts/test_mocks/SafeMath.sol) | 52   | Mock contract for testing | na             |
-| [contracts/test_mocks/Upgrade.sol](./id-staking-v2/contracts/test_mocks/Upgrade.sol)   | 7    | Mock contract for testing | na             |
+| [contracts/test_mocks/GTC.sol](https://github.com/code-423n4/2024-03-gitcoin/blob/main/id-staking-v2/contracts/test_mocks/GTC.sol)           | 205  | Mock contract for testing | na             |
+| [contracts/test_mocks/SafeMath.sol](https://github.com/code-423n4/2024-03-gitcoin/blob/main/id-staking-v2/contracts/test_mocks/SafeMath.sol) | 52   | Mock contract for testing | na             |
+| [contracts/test_mocks/Upgrade.sol](https://github.com/code-423n4/2024-03-gitcoin/blob/main/id-staking-v2/contracts/test_mocks/Upgrade.sol)   | 7    | Mock contract for testing | na             |
 
 # Additional Context
 
@@ -138,13 +138,13 @@ _List any files/contracts that are out of scope for this audit._
 
 An overview of the logic of identity staking has been covered in the **Overview** section above. Further details of how this was designed is covered in the [readme](./id-staking-v2/README.md) in the `id-staking-v2` folder in the sections:
 
-1. [Appendix A: Slashing Rounds](./id-staking-v2/README.md#appendix-a-slashing-rounds)
-2. [Appendix B: Slashing in Consecutive Rounds](./id-staking-v2/README.md#appendix-b-slashing-in-consecutive-rounds)
-3. [Appendix C: Diagrams](./id-staking-v2/README.md#appendix-c-diagrams)
+1. [Appendix A: Slashing Rounds](https://github.com/code-423n4/2024-03-gitcoin/blob/main/id-staking-v2/README.md#appendix-a-slashing-rounds)
+2. [Appendix B: Slashing in Consecutive Rounds](https://github.com/code-423n4/2024-03-gitcoin/blob/main/id-staking-v2/README.md#appendix-b-slashing-in-consecutive-rounds)
+3. [Appendix C: Diagrams](https://github.com/code-423n4/2024-03-gitcoin/blob/main/id-staking-v2/README.md#appendix-c-diagrams)
 
 Also gas optimisations and security aspects are outlined here:
 
-1. [Appendix D: Security](./id-staking-v2/README.md#appendix-d-security)
+1. [Appendix D: Security](https://github.com/code-423n4/2024-03-gitcoin/blob/main/id-staking-v2/README.md#appendix-d-security)
 
 This contract will interact with the GTC ERC-20 contract, as the GTC token will be the token that will be staked. GTC is available on:
 
@@ -209,7 +209,7 @@ TODO: how does this apply to us?
 
 _Provide every step required to build the project from a fresh git clone, as well as steps to run the tests with a gas report._
 
-Running tests in this repo
+## Running tests
 
 Clone and cd into the `id-staking-v2` folder in the repo:
 `git clone https://github.com/code-423n4/2024-03-gitcoin.git && cd 2024-03-gitcoin/id-staking-v2`
