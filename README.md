@@ -96,29 +96,28 @@ After the appeal time has ended, funds will be burned using the `lockAndBurn` fu
 
 [ ⭐️ SPONSORS: add scoping and technical details here ]
 
-- [ ] In the table format shown below, provide the name of each contract and:
+- [x] In the table format shown below, provide the name of each contract and:
   - [ ] source lines of code (excluding blank lines and comments) in each _For line of code counts, we recommend running prettier with a 100-character line length, and using [cloc](https://github.com/AlDanial/cloc)._
   - [ ] external contracts called in each
-  - [ ] libraries used in each
+  - [x] libraries used in each
 
 _List all files in scope in the table below (along with hyperlinks) -- and feel free to add notes here to emphasize areas of focus._
 
------
+---
 
-| Contract                                                                                                                   | SLOC | Purpose                                   | Libraries used    |
-| -------------------------------------------------------------------------------------------------------------------------- | ---- | ----------------------------------------- | ----------------- |
-| [contracts/IIdentityStaking.sol](./id-staking-v2/contracts/IIdentityStaking.sol) | 3  | This contract implements interface for identity staking staking | `@openzeppelin/*` |
-| [contracts/IdentityStaking.sol](./id-staking-v2/contracts/IdentityStaking.sol) | 297  | This contract implements identity staking | na |
-
+| Contract                                                                         | SLOC | Purpose                                                         | Libraries used    |
+| -------------------------------------------------------------------------------- | ---- | --------------------------------------------------------------- | ----------------- |
+| [contracts/IIdentityStaking.sol](./id-staking-v2/contracts/IIdentityStaking.sol) | 3    | This contract implements interface for identity staking staking | `@openzeppelin/*` |
+| [contracts/IdentityStaking.sol](./id-staking-v2/contracts/IdentityStaking.sol)   | 297  | This contract implements identity staking                       | na                |
 
 ## Out of scope
 
 _List any files/contracts that are out of scope for this audit._
 
-----
+---
 
-| Contract                                                                                                                           | SLOC | Purpose                   | Libraries used |
-| ---------------------------------------------------------------------------------------------------------------------------------- | ---- | ------------------------- | -------------- |
+| Contract                                                                               | SLOC | Purpose                   | Libraries used |
+| -------------------------------------------------------------------------------------- | ---- | ------------------------- | -------------- |
 | [contracts/test_mocks/GTC.sol](./id-staking-v2/contracts/test_mocks/GTC.sol)           | 205  | Mock contract for testing | na             |
 | [contracts/test_mocks/SafeMath.sol](./id-staking-v2/contracts/test_mocks/SafeMath.sol) | 52   | Mock contract for testing | na             |
 | [contracts/test_mocks/Upgrade.sol](./id-staking-v2/contracts/test_mocks/Upgrade.sol)   | 7    | Mock contract for testing | na             |
@@ -135,14 +134,24 @@ _List any files/contracts that are out of scope for this audit._
   - `Contract1`: Should comply with `ERC/EIPX`
   - `Contract2`: Should comply with `ERC/EIPY`
 
-----------------
+---
+
+An overview of the logic of identity staking has been covered in the **Overview** section above. Further details of how this was designed is covered in the [readme](./id-staking-v2/README.md) in the `id-staking-v2` folder in the sections:
+
+1. [Appendix A: Slashing Rounds](./id-staking-v2/README.md#appendix-a-slashing-rounds)
+2. [Appendix B: Slashing in Consecutive Rounds](./id-staking-v2/README.md#appendix-b-slashing-in-consecutive-rounds)
+3. [Appendix C: Diagrams](./id-staking-v2/README.md#appendix-c-diagrams)
+
+Also gas optimisations and security aspects are outlined here:
+
+1. [Appendix D: Security](./id-staking-v2/README.md#appendix-d-security)
 
 This contract will interact with the GTC ERC-20 contract, as the GTC token will be the token that will be staked. GTC is available on:
 
 - ETH mainnet, the token contract address is: `0xde30da39c46104798bb5aa3fe8b9e0e1f348163f`
 - Optimism, the token contract address is: `0x1EBA7a6a72c894026Cd654AC5CDCF83A46445B08` (TODO: get confirmation that token address is correct)
 
-The smart contract will be deployed to ETH Mainnet and Optimism.
+The smart contract will be deployed to **ETH Mainnet** and **Optimism**.
 
 The trusted roles are:
 
@@ -153,7 +162,16 @@ The trusted roles are:
 
 The smart contract `IdentityStaking` does not need to comply to any EIP.
 
+The compiler version configured is `^0.8.23` (this already uses unchedked loo increments, so we did not have to do explicit unchecked increments).
+
 ## Attack ideas (Where to look for bugs)
+
+Our main concern is the safety of the funds in the smart contract:
+
+- users can only withdraw what they deposited (minus the slashed amount)
+- only users with SLASHER_ROLE role can slash
+- only users RELEASER_ROLE can release
+- only DEFAULT_ADMIN_ROLE can assign roles or upgrade the contract
 
 _List specific areas to address - see [this blog post](https://medium.com/code4rena/the-security-council-elections-within-the-arbitrum-dao-a-comprehensive-guide-aa6d001aae60#9adb) for an example_
 
@@ -161,7 +179,7 @@ _List specific areas to address - see [this blog post](https://medium.com/code4r
 
 _Describe the project's main invariants (properties that should NEVER EVER be broken)._
 
-TODO: does this apply to us?
+TODO: how does this apply to us?
 
 ## Scoping Details
 
@@ -191,6 +209,15 @@ TODO: does this apply to us?
 
 _Provide every step required to build the project from a fresh git clone, as well as steps to run the tests with a gas report._
 
+Running tests in this repo
+
+Clone and cd into the `id-staking-v2` folder in the repo:
+`git clone https://github.com/code-423n4/2024-03-gitcoin.git && cd 2024-03-gitcoin/id-staking-v2`
+
+Run the tests: `npx hardhat test`
+Run the tests with gas report: `REPORT_GAS=true npx hardhat test`
+
+TODO:
 _Note: Many wardens run Slither as a first pass for testing. Please document any known errors with no workaround._
 
 ## Miscellaneous
